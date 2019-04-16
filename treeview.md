@@ -50,6 +50,43 @@
 	}
   
   
+  Angular Code:
+  postComment(event,post){
+   
+    if(event.keyCode == 13) {
+      console.log(this.message);
+      let postComment = {
+        "postId":post.id,
+        "postComment":this.message,
+        "parentId":0
+      }
+      this.authService.postComment(postComment).subscribe(data=>{     
+       // this.comments = data;
+       this.fetchCommentsByPostId(post.id);
+      })
+  }
+  }
+
+  fetchCommentsByPostId(postId:string){
+    this.authService.fetchCommentsByPostId(postId).subscribe(data=>{
+      this.comments = data;
+    })
+  }
+
+/*   postReply(post,reply){
+    console.log(this.message);
+    
+    let postComment = {
+      "postId":post.id,
+      "postComment":this.CommwentMessage,
+      "parentId":postComment.id
+    }
+
+  } */
+
+
+  
+  
   Tree View:
   //https://angular2-tree.readme.io/docs/
   //https://pusher.com/tutorials/realtime-table-angular
